@@ -1,0 +1,20 @@
+# 默认按文本处理并统一换行
+* text=auto eol=lf
+
+# 图片按二进制处理，避免被当作文本 diff / 损坏
+*.png binary
+*.webp binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+
+# 常见文本
+*.html text
+*.css text
+*.js text
+*.json text
+*.md text
+
+# 统计数据
+*.csv text eol=crlf

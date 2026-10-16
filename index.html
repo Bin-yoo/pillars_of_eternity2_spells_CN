@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>永恒之柱2 · 法术图谱</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>永恒之柱2 · 法术图谱</h1>
+    <p class="hint">按法术等级排列 &middot; 鼠标悬停查看详细图 &middot; 点击图标可放大</p>
+  </header>
+
+  <main id="board" class="board" aria-label="法术列表"></main>
+
+  <div id="preview" class="preview" aria-hidden="true">
+    <img alt="">
+    <div class="preview-cap"></div>
+  </div>
+
+  <div id="lightbox" class="lightbox" aria-hidden="true">
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <span class="lightbox-tip">点击任意处或按 Esc 关闭</span>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

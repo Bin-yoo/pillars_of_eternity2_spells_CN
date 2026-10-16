@@ -1,0 +1,261 @@
+/* ===== 永恒之柱2 法术图谱 ===== */
+:root {
+  --parch: #ece0c4;
+  --gold: #d9c07a;
+  --gold-dim: #a8915a;
+  --frame: #23282e;
+  --frame-hi: #86d8ec;
+  --ink: #241c12;
+  --row-line: rgba(0, 0, 0, .28);
+}
+
+* { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+body {
+  min-height: 100vh;
+  color: var(--parch);
+  font-family: "Georgia", "Times New Roman", "STSong", "SimSun", serif;
+  background:
+    repeating-linear-gradient(180deg,
+      rgba(0, 0, 0, .14) 0 7px,
+      rgba(255, 255, 255, .022) 7px 14px),
+    linear-gradient(180deg, #2b2218 0%, #4b3b28 42%, #3a2d1f 100%);
+  background-attachment: fixed;
+  position: relative;
+}
+
+/* 暗角，模拟老地图质感 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: radial-gradient(ellipse at 50% 35%,
+              rgba(255, 240, 200, .06) 0%,
+              rgba(0, 0, 0, 0) 45%,
+              rgba(0, 0, 0, .45) 100%);
+}
+
+/* ===== 顶栏 ===== */
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  text-align: center;
+  padding: 18px 16px 14px;
+  background: linear-gradient(180deg, rgba(20, 15, 9, .96), rgba(20, 15, 9, .82) 70%, rgba(20, 15, 9, 0));
+  border-bottom: 1px solid rgba(217, 192, 122, .25);
+  backdrop-filter: blur(2px);
+}
+
+.topbar h1 {
+  margin: 0;
+  font-size: clamp(20px, 2.6vw, 30px);
+  letter-spacing: .16em;
+  color: var(--gold);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .8), 0 0 22px rgba(217, 192, 122, .25);
+  font-weight: 600;
+}
+
+.topbar .hint {
+  margin: 7px 0 0;
+  font-size: 12.5px;
+  letter-spacing: .06em;
+  color: rgba(236, 224, 196, .6);
+}
+
+/* ===== 棋盘主体 ===== */
+.board {
+  position: relative;
+  z-index: 1;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 18px clamp(10px, 2vw, 28px) 80px;
+}
+
+.level {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(12px, 1.6vw, 26px);
+  padding: 16px 6px 18px;
+  border-bottom: 1px solid var(--row-line);
+}
+.level:last-child { border-bottom: none; }
+
+/* 等级菱形徽记 */
+.level-mark {
+  flex: 0 0 auto;
+  width: 58px;
+  height: 58px;
+  margin: 6px 4px 0;
+  display: grid;
+  place-items: center;
+  transform: rotate(45deg);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, #35725474, transparent 60%),
+    linear-gradient(160deg, #2f6b4f, #1d4534 70%, #16362a);
+  border: 2px solid var(--gold-dim);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .6) inset,
+              0 6px 16px rgba(0, 0, 0, .55),
+              0 0 18px rgba(217, 192, 122, .12);
+}
+.level-mark span {
+  transform: rotate(-45deg);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: #efe6c8;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .9);
+}
+
+/* 法术格子 */
+.spells {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-bottom: 4px;
+}
+
+.spell {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: 7px;
+}
+
+.spell .icon {
+  display: block;
+  width: 64px;
+  height: 64px;
+  border-radius: 7px;
+  border: 1px solid rgba(150, 180, 200, .35);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .55);
+  transition: transform .14s ease, border-color .14s ease, box-shadow .14s ease;
+  image-rendering: auto;
+}
+
+.spell:hover .icon,
+.spell:focus-visible .icon {
+  transform: translateY(-3px) scale(1.06);
+  border-color: var(--frame-hi);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .7),
+              0 0 0 1px var(--frame-hi),
+              0 0 20px rgba(134, 216, 236, .55);
+}
+
+.spell:focus-visible { outline: none; }
+
+/* 悬停时在图标下浮现的小名字标签 */
+.spell .cap {
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 6px);
+  white-space: nowrap;
+  font-family: "STSong", "SimSun", serif;
+  font-size: 12px;
+  line-height: 1.3;
+  padding: 3px 8px;
+  border-radius: 5px;
+  color: var(--parch);
+  background: rgba(12, 9, 5, .92);
+  border: 1px solid rgba(217, 192, 122, .35);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .14s ease;
+  z-index: 6;
+}
+.spell:hover .cap,
+.spell:focus-visible .cap { opacity: 1; }
+
+/* ===== 悬停详细图 ===== */
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .12s ease;
+  will-change: transform;
+}
+.preview.show { opacity: 1; }
+
+.preview img {
+  display: block;
+  width: clamp(320px, 40vw, 560px);
+  height: auto;
+  border: 2px solid var(--gold-dim);
+  border-radius: 8px;
+  background: #12100b;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .8),
+              0 0 0 1px rgba(0, 0, 0, .6);
+}
+.preview .preview-cap {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 14px;
+  letter-spacing: .05em;
+  color: var(--gold);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .9);
+}
+
+/* ===== 点击放大 ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 24px;
+  background: rgba(6, 4, 2, .88);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s ease;
+}
+.lightbox.show { opacity: 1; pointer-events: auto; }
+
+.lightbox figure {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.lightbox img {
+  max-width: 92vw;
+  max-height: 84vh;
+  border: 2px solid var(--gold-dim);
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .85);
+}
+.lightbox figcaption {
+  font-size: 18px;
+  letter-spacing: .08em;
+  color: var(--gold);
+}
+.lightbox-tip {
+  font-size: 12px;
+  color: rgba(236, 224, 196, .5);
+}
+
+/* ===== 窄屏适配 ===== */
+@media (max-width: 620px) {
+  .level { gap: 10px; }
+  .level-mark { width: 42px; height: 42px; margin-top: 8px; border-radius: 6px; }
+  .level-mark span { font-size: 16px; }
+  .spell, .spell .icon { width: 54px; height: 54px; }
+  .preview img { width: 84vw; }
+}
