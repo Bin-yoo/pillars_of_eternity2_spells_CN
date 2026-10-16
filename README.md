@@ -1,4 +1,4 @@
-# 永恒之柱2 · 法术图谱
+# 永恒之柱2 · 法术表
 
 《永恒之柱2：死火》(Pillars of Eternity II: Deadfire) 的法术图鉴网页。
 
@@ -21,9 +21,11 @@
 ```
 .
 ├── index.html                  # 页面结构
-├── styles.css                  # 样式
-├── app.js                      # 交互逻辑
-├── data.js                     # 法术数据（等级 / 名称 / 图标 / 说明图路径）
+├── css/
+│   └── styles.css              # 样式
+├── js/
+│   ├── app.js                  # 交互逻辑
+│   └── data.js                 # 法术数据（等级 / 名称 / 图标 / 说明图路径）
 ├── images/
 │   ├── level-1/                # 1 级法术
 │   │   ├── <法术名>icon.png     # 图标（缩略图）
@@ -46,7 +48,7 @@
 
 ## 🗂 数据格式
 
-法术数据集中在 `data.js`，每一项形如：
+法术数据集中在 `js/data.js`，每一项形如：
 
 ```js
 window.SPELLS = [
