@@ -50,7 +50,6 @@
           btn.className = "spell";
           btn.dataset.name = s.name;
           btn.dataset.detail = s.detail;
-          btn.title = s.name;
           btn.setAttribute("aria-label", s.name);
 
           var img = document.createElement("img");
