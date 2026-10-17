@@ -2,7 +2,7 @@
 
 《永恒之柱2：死火》(Pillars of Eternity II: Deadfire) 的法术表网页。
 
-按法术等级（I–IX）排列全部 **102** 个法术，鼠标悬停即可查看该法术的完整说明图，点击图标可放大查看。
+按法术等级（I–IX）排列全部 **106** 个法术，鼠标悬停即可查看该法术的完整说明图，点击图标可放大查看。
 
 ## ✨ 特性
 
@@ -36,10 +36,12 @@
 │   └── data.js                 # 法术数据（等级 / 名称 / 图标 / 说明图路径）
 ├── images/
 │   ├── level-1/                # 1 级法术
-│   │   ├── <法术名>icon.png     # 图标（缩略图）
+│   │   ├── <法术名>icon.webp    # 图标（缩略图）
 │   │   └── <法术名>.webp        # 详细说明图
 │   ├── level-2/
 │   └── ... level-9/
+├── base_images/                # 处理前的原始截图（本地，已 gitignore）
+│   └── level-1/ ... level-9/
 ├── docs/
 │   └── 游戏内法术表示意图.png     # 设计参考图
 ├── README.md
@@ -63,7 +65,7 @@ window.SPELLS = [
   {
     "level": 1,
     "name": "冰雾术",
-    "icon": "images/level-1/冰雾术icon.png",
+    "icon": "images/level-1/冰雾术icon.webp",
     "detail": "images/level-1/冰雾术.webp"
   },
   // ...
@@ -72,8 +74,8 @@ window.SPELLS = [
 
 - `level`：法术等级（1–9）
 - `name`：法术名称
-- `icon`：列表用缩略图
-- `detail`：悬停/点击时展示的说明图
+- `icon`：列表用缩略图（64×64，WebP）
+- `detail`：悬停/点击时展示的说明图（WebP）
 
 新增法术时，把图标与说明图放进对应 `images/level-N/` 目录，并在 `data.js` 中追加一条即可。
 
